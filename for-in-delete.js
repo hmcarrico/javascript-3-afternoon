@@ -1,219 +1,132 @@
 /*
-  Once you complete a problem, refresh ./for-in-delete.html in your browser and check to see if the problem's test(s) are passing.
+  Once you complete a problem, refresh ./higher-order.html in your browser and check to see if the problem's test(s) are passing.
   Passed tests will be indicated by a green circle.
   Failed tests will be indicated by a red X.
 
   You can refresh the page at any time to re-run all the tests.
 */
 
-/*
-  First we'll look at the difference between accessing property values in a for in loop and accessing the property name in a for in loop.
-  In the example below, we are accessing the property values. Uncomment the code below, run it and look at what prints in the console.
-*/
-
-// var values = {
-//   one: 'These',
-//   two: ' are',
-//   three: ' the',
-//   four: ' property',
-//   five: ' values.'
-// } 
-
-// for(var key in values) {
-//   console.log(values[key])
-// }
-
-/*
-  In this next example, we are accessing the property names themselves. Uncomment the code below, run it and look at what prints in the console.
-*/
-
-// for(var key in values) {
-//   console.log(key)
-// }
-
-
-
 ////////// PROBLEM 1 //////////
 
+// Do not edit the code below.
+const mixedNumbers = [6,3,1,7,5,2,6,8,9,4,2,7,9,3,1,8,4,3];
+// Do not edit the code above.
+
 /*
-  Inside the function showValues, write a for in loop that concatenates each of the property values and returns the concatenated string.
+  Use the filter method on mixedNumbers to make a new array of just the even numbers.
+
+  The filter function takes a callback with the parameters
+  function(element, index, wholeArray){}  Function Form
+  (element, index, wholeArray)=>{}    Arrow Form
 */
 
-function showValues( obj ) {
-  let arr = []; 
-  for(var x in obj) {
-    arr.push(obj[x])
-  }
-  return arr.join("");
-}
+//Code Here
+let evenNumbers = mixedNumbers.filter(element => element % 2 === 0)
 
 
 
 ////////// PROBLEM 2 //////////
 
+// Do not edit the code below.
+const prices = [15.00, 23.00, 78.00, 34.00, 12.00, 86.00, 12.00, 79.00, 32.00];
+// Do not edit the code above.
+
 /*
-  Write a function called greaterThan10 that takes in an object. 
-  Write a for in loop that loops over the object and changes any value that is great than 10 to 0. 
-  Return the updated object.
+  Use the map method on the prices array to calculate a new array of post-tax prices.
+  Use a 7% tax rate.
+
+  Math reminder! To calculate the price after tax, multiply the price by 1 plus the taxRate as a decimal.
+  Example: if tax is 7%, the price afterTax could be calculated like this: afterTax = price * 1.07) 
+
+  The map function also takes a callback with the parameters
+  function(element, index, wholeArray){}  Function Form
+  (element, index, wholeArray)=>{}    Arrow Form
 */
 
 //Code Here
+let postTaxPrices = prices.map(e => e * 1.07)
 
-function greaterThan10( obj ){
-  for(let x in obj){
-    if(obj[x]>10){
-      obj[x]=0;
-    }
-  }
-  return obj;
-}
+
 
 ////////// PROBLEM 3 //////////
 
+// Do not edit the code below.
+const populations = [8175133, 3792621, 2695598, 2100263];
+// Do not edit the code above.
+
 /*
-  Write a function called double that takes in an object.
-  Write a for in loop that loops over the object and changes every value to be itself multipled by 2.
-  Return the updated object.
+  Use the reduce method to calculate the sum of all the populations in the array.
+
+  The reduce function has a slightly different setup for it's callback.
+  function(runningTotal, curElement, curIndex, wholeArray){} Function Form
+  (runningTotal, curElement, curIndex, wholeArray)=>{} Arrow Form
 */
 
 //Code Here
-
-function double( obj ){
-  for(let x in obj){
-    obj[x] = obj[x]*2
-  }
-  return obj;
-}
+let totalPopulation = populations.reduce((runningTotal, curElement) => {
+  return runningTotal + curElement;
+})
 
 ////////// PROBLEM 4 //////////
 
+// Do not edit the code below.
+const monstersInYourPocket = [{"monster":"Bulbabunny","CP":156},{"monster":"Bulbabunny","CP":135},
+{"monster":"Bulbabunny","CP":250},{"monster":"Ponylopse","CP":277},{"monster":"Ponylopse","CP":184},
+{"monster":"Pikadoughnet","CP":207},{"monster":"Bulbabunny","CP":139},{"monster":"Pikadoughnet","CP":47},
+{"monster":"Pikadoughnet","CP":175},{"monster":"WaterHorsia","CP":26},{"monster":"Ponylopse","CP":19},
+{"monster":"Pikadoughnet","CP":218},{"monster":"Charaflier","CP":101},{"monster":"WaterHorsia","CP":96},
+{"monster":"Pikadoughnet","CP":253},{"monster":"Sandmush","CP":146},{"monster":"Bulbabunny","CP":247},
+{"monster":"Charaflier","CP":55},{"monster":"Bulbabunny","CP":72},{"monster":"Pikadoughnet","CP":300},
+{"monster":"Sandmush","CP":262},{"monster":"Sandmush","CP":25},{"monster":"Charaflier","CP":215},
+{"monster":"Ponylopse","CP":125},{"monster":"Bulbabunny","CP":178}];
+// Do not edit the code above.
+
 /*
-  Write a function called secrets that will take in an object.
-  Create an empty string variable.
-  Write a for in loop that loops over the object.
-  If the property name starts with an 'sh', concatenate the value to the string variable.
-  By the end of the for in loop, you should have a sentence, return that sentence.
+  Now we're going to ramp these up a little bit.
+  Instead of just arrays of numbers, we are going to have array of objects that we want to use map, filter, and reduce with.
+
+  Use the filter method to return only the monsters that have a CP of over 200.
 */
 
 //Code Here
-
-function secrets(obj){
-  let emptyStr = "";
-  for(let x in obj){
-    if(x.startsWith("sh")){
-      emptyStr += obj[x];
-    }
-  }
-  return emptyStr;
-}
-
-/* 
-  Sometimes it's needed to delete object properties. 
-  All you need is the word delete before a reference to the object property value. 
-  Uncomment the example below to see a for in loop deleting all the properties inside an object.
-*/
-
-// var deleteAllThethings = {
-//   one: 1,
-//   two: 2,
-//   three: 3
-// }
-
-// for(var key in deleteAllThethings) {
-//   delete deleteAllThethings[key]
-// }
-
-// console.log(deleteAllThethings)
+let myStrongest = monstersInYourPocket.filter(e => e.CP > 200)
 
 
 
 ////////// PROBLEM 5 //////////
 
+// Do not edit code below.
+const orders = [{"price":15,"tax":0.09},{"price":42,"tax":0.07},{"price":56,"tax":0.11},
+{"price":80,"tax":0.11},{"price":69,"tax":0.06},{"price":68,"tax":0.14},
+{"price":72,"tax":0.14},{"price":51,"tax":0.09},{"price":89,"tax":0.15},
+{"price":48,"tax":0.13}];
+// Do not edit code above.
+
 /*
-  Write a function called removePassword that takes in an object.
-  Delete the property password and return the object.
+  Use a higher order method to get the sum of all the order totals after adding in the sales tax
 */
 
-//Code Here
-
-function removePassword(obj){
-  for(let x in obj){
-    if(x === "password"){
-      delete obj[key];
-    }
-  }
-  return obj;
-}
-
-
-
+let ordersTotal = orders.map(e => e.tax + e )
 ////////// PROBLEM 6 //////////
 
 // Do not edit the code below.
-var deleteTheBigNumbers = {
-  first: 10,
-  second: 20,
-  third: 110,
-  fourth: 200
-}
+const purchases = [{"owner":"Barry","price":103},{"owner":"Bob","price":75},
+{"owner":"Bob","price":73},{"owner":"Barry","price":57},{"owner":"Barry","price":128},
+{"owner":"Bob","price":119},{"owner":"Barry","price":133},{"owner":"Barry","price":27},
+{"owner":"Barry","price":138},{"owner":"Bob","price":68},{"owner":"Bob","price":50},
+{"owner":"Barry","price":9},{"owner":"Bob","price":123},{"owner":"Bob","price":135},
+{"owner":"Barry","price":30},{"owner":"Barry","price":129},{"owner":"Barry","price":38},
+{"owner":"Bob","price":133},{"owner":"Barry","price":109},{"owner":"Bob","price":115}];
 // Do not edit the code above.
 
 /*
-  Write a for in loop that deletes every property from the object deleteTheBigNumbers whose value is greater than 100.
+  Use a high order method to create to get the sum of bobsTotal.
 */
 
-//Code Here
-
-function removeBig(obj){
-  for(let x in obj){
-    if(obj[x]>100){
-      delete obj[x];
-    }
-  }
-  return obj;
-}
-
-removeBig(deleteTheBigNumbers);
-
-////////// PROBLEM 7 //////////
-
-/*
-  Write a function called startsWithK that takes an object as a parameter.
-  Write a for in loop to loop over the object.
-  If any property name starts with k, delete that property.
-  Return the updated object.
-*/
-
-//Code Here
-
-function startsWithK(obj){
-  for(let x in obj){
-    if(x.startsWith("k")){
-      delete obj[x];
-    }
-  }
-  return obj;
-}
-
-////////// PROBLEM 8 //////////
-
-/*
-  Write a function called hiddenTreasure that takes in an object.
-  Write a for in loop that loops over this object. Each property will have a sentence as it's value.
-  If the property value does not contain the word 'treasure', delete the property.
-  Return the updated object.
-
-  (hint: the method includes() may be of use...)
-*/
-
-//Code Here
-
-function hiddenTreasure(obj){
-  for(let x in obj){
-    if(!obj[x].includes("treasure")){
-      delete obj[x];
-    }
-  }
-  return obj;
-}
+// let bobsTotal = purchases.filter(e => {
+//    if(e.owner === 'Bob'){
+//      return 
+//    }
+//    purchases.reduce((total, e) => total + e.price)
+//   })
 
